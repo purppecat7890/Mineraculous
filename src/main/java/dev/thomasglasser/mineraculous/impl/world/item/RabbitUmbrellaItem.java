@@ -297,6 +297,8 @@ public class RabbitUmbrellaItem extends SwordItem implements GeoItem, ModeledIte
         BLADE,
         BLOCK,
         PHONE((stack, player) -> Mineraculous.Dependencies.TOMMYTECH.isLoaded()),
+        OPEN,
+        CLOSE,
         THROW;
 
         public static final Codec<Ability> CODEC = StringRepresentable.fromEnum(Ability::values);

@@ -14,6 +14,7 @@ public class MineraculousItemDisplayContexts {
 
     /// Default and fallback, aligns with {@link HumanoidModel#body}
     public static final EnumProxy<ItemDisplayContext> CURIOS_BODY = register("curios_body", NONE);
+
     /// Aligns with {@link HumanoidModel#head}
     public static final EnumProxy<ItemDisplayContext> CURIOS_HEAD = register("curios_head", HEAD);
     /// Special-cased to align with and render once on each side of {@link HumanoidModel#head}

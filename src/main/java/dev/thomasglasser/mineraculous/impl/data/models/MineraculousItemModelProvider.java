@@ -190,7 +190,7 @@ public class MineraculousItemModelProvider extends ExtendedItemModelProvider {
                 .end();
         ItemModelBuilder inHandRabbitUmbrella = withEntityModel(MineraculousItems.RABBIT_UMBRELLA.getId().withSuffix("_in_hand"))
                 .transforms()
-                .transform(MineraculousItemDisplayContexts.CURIOS_BODY.getValue()).rotation(0, 0, 45).translation(0, 0, 4f).scale(0.44531f).end()
+                .transform(MineraculousItemDisplayContexts.CURIOS_BODY.getValue()).rotation(-90, 0, 0).translation(-2, 10, 3.7f).scale(0.8f).end()
                 .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).translation(0f, -6f, -0.25f).rotation(-16.96f, 79.64f, 36.05f).scale(0.44531f).end()
                 .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).translation(0f, -6f, -0.25f).rotation(-16.96f, 79.64f, 36.05f).scale(0.44531f).end()
                 .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).translation(4.75f, -7.25f, -0.25f).rotation(-46.79f, 78.28f, 78.28f).scale(0.43945f).end()

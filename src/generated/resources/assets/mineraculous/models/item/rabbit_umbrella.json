@@ -45,19 +45,19 @@
       },
       "mineraculous:curios_body": {
         "rotation": [
+          -90,
           0,
-          0,
-          45
+          0
         ],
         "scale": [
-          0.44531,
-          0.44531,
-          0.44531
+          0.8,
+          0.8,
+          0.8
         ],
         "translation": [
-          0,
-          0,
-          4
+          -2,
+          10,
+          3.7
         ]
       },
       "thirdperson_lefthand": {
