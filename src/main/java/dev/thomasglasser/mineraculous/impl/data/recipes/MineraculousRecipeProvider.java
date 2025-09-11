@@ -19,10 +19,12 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
@@ -47,6 +49,16 @@ public class MineraculousRecipeProvider extends ExtendedRecipeProvider {
         cheeseWaxRecipes(recipeOutput, MineraculousBlocks.CAMEMBERT, MineraculousBlocks.WAXED_CAMEMBERT);
 
         SpecialRecipeBuilder.special(CheeseWedgeRecipe::new).save(recipeOutput, Mineraculous.modLoc("cheese_wedge"));
+
+        // Macaron
+        SimpleCookingRecipeBuilder.smoking(
+                Ingredient.of(MineraculousItems.RAW_MACARON),
+                RecipeCategory.FOOD,
+                MineraculousItems.MACARON,
+                0.1f,
+                200)
+                .unlockedBy("has_raw_macaron", has(MineraculousItems.RAW_MACARON))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(MineraculousItems.MACARON.getId().getNamespace(), getConversionRecipeName(MineraculousItems.MACARON, MineraculousItems.MACARON)));
 
         trimWithCopy(recipeOutput, MineraculousItems.LADYBUG_ARMOR_TRIM_SMITHING_TEMPLATE, Blocks.RED_CONCRETE);
         trimWithCopy(recipeOutput, MineraculousItems.CAT_ARMOR_TRIM_SMITHING_TEMPLATE, Blocks.LIME_CONCRETE);

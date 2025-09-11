@@ -62,6 +62,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -70,6 +71,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -137,6 +139,9 @@ public class MineraculousClientEvents {
             addCheeses(event, MineraculousItems.WAXED_CHEESE.get(AgeingCheese.Age.TIME_HONORED).toStack(), MineraculousBlocks.WAXED_CHEESE);
             addCheeses(event, MineraculousBlocks.WAXED_CHEESE.get(AgeingCheese.Age.TIME_HONORED).toStack(), MineraculousItems.WAXED_CAMEMBERT);
             addCheeses(event, MineraculousItems.WAXED_CAMEMBERT.get(AgeingCheese.Age.TIME_HONORED).toStack(), MineraculousBlocks.WAXED_CAMEMBERT);
+            event.insertAfter(Items.COOKIE.getDefaultInstance(), MineraculousItems.RAW_MACARON.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(MineraculousItems.RAW_MACARON.toStack(), MineraculousItems.MACARON.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
         } else if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.insertAfter(Items.BLAZE_POWDER.getDefaultInstance(), MineraculousItems.CATACLYSM_DUST.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
@@ -222,6 +227,16 @@ public class MineraculousClientEvents {
             }
             return -1;
         }, MineraculousArmors.MIRACULOUS.getAllAsItems().toArray(new Item[0]));
+
+        event.register((state, index) -> {
+            int i;
+            if (state.is(ItemTags.DYEABLE)) {
+                i = FastColor.ARGB32.opaque(DyedItemColor.getOrDefault(state, 0xffffff));
+            } else {
+                i = -1;
+            }
+            return i;
+        }, MineraculousItems.MACARON, MineraculousItems.RAW_MACARON);
     }
 
     static void onRegisterClientReloadListeners(RegisterClientReloadListenersEvent event) {

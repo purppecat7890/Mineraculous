@@ -115,6 +115,8 @@ public class MineraculousEnUsLanguageProvider extends ExtendedEnUsLanguageProvid
         add(MineraculousItems.GREAT_SWORD.get(), "Great Sword");
         add(MineraculousItems.CATACLYSM_DUST.get(), "Cataclysm Dust");
         add(MineraculousBlocks.HIBISCUS_BUSH.asItem(), "Hibiscus");
+        add(MineraculousItems.MACARON.get(), "Macaron");
+        add(MineraculousItems.RAW_MACARON.get(), "Raw Macaron");
 
         // Tool Abilities
         addToolAbilities(LadybugYoyoItem.Ability.values());

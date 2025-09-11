@@ -34,6 +34,7 @@ public class MineraculousItemTagsProvider extends ExtendedItemTagsProvider {
         addArmorTrims();
         addCurios();
         addAbilities();
+        addDyeable();
 
         // Misc
         tag(MineraculousItemTags.TOUGH)
@@ -69,6 +70,11 @@ public class MineraculousItemTagsProvider extends ExtendedItemTagsProvider {
         }
     }
 
+    private void addDyeable() {
+        tag(ItemTags.DYEABLE)
+                .add(MineraculousItems.RAW_MACARON);
+    }
+
     private void addKwamiFoods() {
         // Ladybug
         tag(MineraculousItemTags.LADYBUG_KWAMI_FOODS)
@@ -76,7 +82,8 @@ public class MineraculousItemTagsProvider extends ExtendedItemTagsProvider {
 
         tag(MineraculousItemTags.LADYBUG_KWAMI_TREATS)
                 .add(Items.COOKIE)
-                .add(Items.CAKE);
+                .add(Items.CAKE)
+                .add(MineraculousItems.MACARON.get());
 
         // Cat
         tag(MineraculousItemTags.CAT_KWAMI_FOODS)

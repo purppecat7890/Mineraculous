@@ -69,6 +69,10 @@ public class MineraculousItems {
     // Spawn Eggs
     public static final DeferredItem<SpawnEggItem> KAMIKO_SPAWN_EGG = registerSpawnEgg(MineraculousEntityTypes.KAMIKO, 0xc8e5ea, 0x140325);
 
+    // Macarons
+    public static final DeferredItem<Item> MACARON = register("macaron", () -> new Item(new Item.Properties().food(MineraculousFoods.MACARON)));
+    public static final DeferredItem<Item> RAW_MACARON = register("raw_macaron", () -> new Item(new Item.Properties()));
+
     // Cheese Wedges
     public static final SortedMap<AgeingCheese.Age, DeferredItem<ItemNameBlockItem>> CHEESE = wedges("cheese", MineraculousFoods.CHEESE, MineraculousBlocks.CHEESE);
     public static final SortedMap<AgeingCheese.Age, DeferredItem<ItemNameBlockItem>> WAXED_CHEESE = waxedWedges("cheese", MineraculousBlocks.WAXED_CHEESE);
