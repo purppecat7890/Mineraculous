@@ -13,6 +13,7 @@ public class MineraculousRecipeSerializers {
 
     public static final DeferredHolder<RecipeSerializer<?>, SimpleCraftingRecipeSerializer<CheeseWedgeRecipe>> CHEESE_WEDGE = RECIPE_SERIALIZERS.register("crafting_special_cheesewedge", () -> new SimpleCraftingRecipeSerializer<>(CheeseWedgeRecipe::new));
 
+    public static final DeferredHolder<RecipeSerializer<?>, TransmuteCookingSerializer<TransmuteSmeltingRecipe>> TRANSMUTE_SMELTING = RECIPE_SERIALIZERS.register("transmute_smelting", () -> new TransmuteCookingSerializer<>(TransmuteSmeltingRecipe::new));
     @ApiStatus.Internal
     public static void init() {}
 }

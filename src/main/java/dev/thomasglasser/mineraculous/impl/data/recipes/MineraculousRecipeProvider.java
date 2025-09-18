@@ -7,10 +7,13 @@ import dev.thomasglasser.mineraculous.api.world.level.block.AgeingCheeseEdibleFu
 import dev.thomasglasser.mineraculous.api.world.level.block.MineraculousBlocks;
 import dev.thomasglasser.mineraculous.api.world.level.block.PieceBlock;
 import dev.thomasglasser.mineraculous.impl.Mineraculous;
+import dev.thomasglasser.mineraculous.impl.world.item.crafting.AbstractTransmuteCookingRecipe;
 import dev.thomasglasser.mineraculous.impl.world.item.crafting.CheeseWedgeRecipe;
 import dev.thomasglasser.tommylib.api.data.recipes.ExtendedRecipeProvider;
 import dev.thomasglasser.tommylib.api.registration.DeferredBlock;
 import dev.thomasglasser.tommylib.api.tags.ConventionalItemTags;
+
+import java.util.List;
 import java.util.SortedMap;
 import java.util.concurrent.CompletableFuture;
 import net.minecraft.core.HolderLookup;
@@ -24,7 +27,11 @@ import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SmokingRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
@@ -51,6 +58,8 @@ public class MineraculousRecipeProvider extends ExtendedRecipeProvider {
         SpecialRecipeBuilder.special(CheeseWedgeRecipe::new).save(recipeOutput, Mineraculous.modLoc("cheese_wedge"));
 
         // Macaron
+        macaronCooking(recipeOutput, RecipeSerializer.SMOKING_RECIPE, SmokingRecipe::new, MineraculousItems.RAW_MACARON.get(), RecipeCategory.FOOD, MineraculousItems.MACARON.get(), 200, 200, "macaron");
+
         SimpleCookingRecipeBuilder.smoking(
                 Ingredient.of(MineraculousItems.RAW_MACARON),
                 RecipeCategory.FOOD,
@@ -63,6 +72,25 @@ public class MineraculousRecipeProvider extends ExtendedRecipeProvider {
         trimWithCopy(recipeOutput, MineraculousItems.LADYBUG_ARMOR_TRIM_SMITHING_TEMPLATE, Blocks.RED_CONCRETE);
         trimWithCopy(recipeOutput, MineraculousItems.CAT_ARMOR_TRIM_SMITHING_TEMPLATE, Blocks.LIME_CONCRETE);
         trimWithCopy(recipeOutput, MineraculousItems.BUTTERFLY_ARMOR_TRIM_SMITHING_TEMPLATE, Blocks.PURPLE_CONCRETE);
+    }
+
+    protected static <T extends AbstractTransmuteCookingRecipe> void macaronCooking(
+            RecipeOutput recipeOutput,
+            RecipeSerializer<T> serializer,
+            AbstractCookingRecipe.Factory<T> recipeFactory,
+            List<ItemLike> ingredients,
+            RecipeCategory category,
+            ItemLike result,
+            float experience,
+            int cookingTime,
+            String suffix
+    ) {
+        for (ItemLike itemlike : ingredients) {
+            SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), category, result, experience, cookingTime, serializer, recipeFactory)
+                    .group(getItemName(MineraculousItems.RAW_MACARON))
+                    .unlockedBy(getHasName(itemlike), has(itemlike))
+                    .save(recipeOutput, getItemName(result) + suffix + "_" + getItemName(itemlike));
+        }
     }
 
     protected void cheeseWaxRecipes(RecipeOutput recipeOutput, SortedMap<AgeingCheese.Age, DeferredBlock<AgeingCheeseEdibleFullBlock>> waxables, SortedMap<AgeingCheese.Age, DeferredBlock<PieceBlock>> waxedBlocks) {
